@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Etch-a-sketch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <h1 style="text-align: center;">ETCH-A-SKETCH</h1>
+    <div class="buttons">
+        <button onclick=changeGridSize()>Change Grid Size</button>
+        <button onclick=black()>Black</button>
+        <button onclick=randomColors()>Random Colors</button>
+        <button onclick=fadeToBlack()>Fade To Black</button>
+    </div>
+
+    <div class="container">
+
+
+    </div>
+
+
+
+    <script>
+        const container = document.querySelector(".container");
+        let mode=1;
+
+        function black(){
+            mode=1;
+        }
+
+        function randomColors(){
+            mode=2;
+
+        }
+
+        function fadeToBlack(){
+            mode=3;
+        }
+
+
+
+        function createGrid(size) {
+
+            container.innerHTML = "";
+            container.style.gridTemplateColumns = `repeat(${size},auto)`;
+            for (i = 0; i < size; i++) {
+                for (j = 0; j < size; j++) {
+                    let div = document.createElement("div");
+                    container.appendChild(div);
+                    div.classList.add("field");
+                    div.setAttribute("data-counter",10);
+                    
+
+                }
+            }
+
+            const fields = document.querySelectorAll(".field");
+            fields.forEach(field => {
+                field.style.backgroundColor= "white";
+                field.addEventListener("mouseenter", () => {
+                    
+                    if (mode==1){
+                        field.style.backgroundColor = "black";
+                    }
+                    else if (mode==2){
+                        field.style.backgroundColor = `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`;
+
+                    }
+                    else {
+                        
+                        counter=field.getAttribute("data-counter");
+                        counter-=1;
+                        field.style.filter= `brightness(${counter*10}%)`;
+                        field.setAttribute("data-counter",counter);
+                    }
+
+
+                });
+
+            });
+
+        }
+
+        createGrid(16);
+
+        function changeGridSize() {
+            let size = prompt("How many rows/columns?");
+            createGrid(size);
+
+
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

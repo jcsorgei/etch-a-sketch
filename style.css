@@ -1,0 +1,21 @@
+
+
+.container{
+    margin:auto;
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(16,auto);
+    
+}
+div{
+  
+    border: 1px solid  black;
+}
+
+.buttons{
+    border: 0px;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
